@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/icon copy.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Portfólio - Agência WRN</title>
+</head>
+<body>
+    <div class="caixa-video">
+        <video src="./video/ai-background.mp4" autoplay muted loop></video>
+        <div class="mascara"></div>
+    </div>
+
+    <header class="header">
+        <a href="index.html">
+            <img src="./img/logo.wrn.png" alt="Agência WRN" class="logo">
+        </a>
+        <div class="menu-mobile">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os serviços de Chatbot com IA da Agência WRN." target="_blank">Chatbot com IA</a>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre o desenvolvimento de aplicativos da Agência WRN." target="_blank">Aplicativos</a>
+            <a href="portfolio.html">Portfólio</a>
+            <a href="briefing.html">Orçamento</a>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de conversar com a equipe da Agência WRN." target="_blank">Contato</a>
+        </nav>
+        <div class="cta-buttons">
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de conversar sobre um projeto com a Agência WRN." target="_blank" class="btn btn-outline">Fale Conosco</a>
+            <a href="#orcamento" onclick="window.location.href='briefing.html'" class="btn btn-primary">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <main class="portfolio-section">
+        <h1>Nosso Portfólio</h1>
+        <p class="portfolio-intro">Conheça alguns dos nossos projetos mais recentes em Chatbots e Aplicativos</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image video-container">
+                    <video autoplay loop muted playsinline>
+                        <source src="./video/mk.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="portfolio-content">
+                    <h3>Chatbot Inteligente</h3>
+                    <p>Sistema de atendimento automatizado com IA para e-commerce com respostas precisas e personalizadas</p>
+                    <span class="tag">Chatbot</span>
+                    <span class="tag">IA</span>
+                    <span class="tag">WhatsApp</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <img src="./img/agpedidos.png" alt="Sistema de Pedidos Online">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Sistema de Pedidos Online</h3>
+                    <p>Plataforma completa para gestão de pedidos e delivery com atendimento automatizado via WhatsApp</p>
+                    <span class="tag">Web</span>
+                    <span class="tag">WhatsApp</span>
+                    <span class="tag">Delivery</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <img src="./img/agzap.png" alt="Sistema de Agendamento">
+                </div>
+                <div class="portfolio-content">
+                    <h3>Sistema de Agendamento</h3>
+                    <p>Plataforma integrada para gestão de agendamentos e atendimentos via WhatsApp com agendamentos 100% automatizados pela IA</p>
+                    <span class="tag">Web</span>
+                    <span class="tag">WhatsApp</span>
+                    <span class="tag">IA</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os projetos da Agência WRN." target="_blank" class="cta-button">QUERO UM PROJETO ASSIM</a>
+    </main>
+
+    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os serviços da Agência WRN." target="_blank"
+        class="link-whatsapp">
+        <img src="./img/whatsapp.png" alt="Fale conosco no WhatsApp">
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuMobile = document.querySelector('.menu-mobile');
+            const nav = document.querySelector('nav');
+
+            menuMobile.addEventListener('click', function() {
+                menuMobile.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuMobile.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.video-container video');
+            if (video) {
+                video.playbackRate = 5.0; // Velocidade 5x
+            }
+        });
+    </script>
+</body>
+</html>

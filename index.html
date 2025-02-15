@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/icon copy.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Agência WRN - Chatbots e Aplicativos</title>
+</head>
+<body>
+    <div class="caixa-video">
+        <video src="./video/ai-background.mp4" autoplay muted loop></video>
+        <div class="mascara"></div>
+    </div>
+
+    <header class="header">
+        <a href="index.html">
+            <img src="./img/logo.wrn.png" alt="Agência WRN" class="logo">
+        </a>
+        <div class="menu-mobile">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os serviços de Chatbot com IA da Agência WRN." target="_blank">Chatbot com IA</a>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre o desenvolvimento de aplicativos da Agência WRN." target="_blank">Aplicativos</a>
+            <a href="portfolio.html">Portfólio</a>
+            <a href="briefing.html">Orçamento</a>
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de conversar com a equipe da Agência WRN." target="_blank">Contato</a>
+        </nav>
+        <div class="cta-buttons">
+            <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de conversar sobre um projeto com a Agência WRN." target="_blank" class="btn btn-outline">Fale Conosco</a>
+            <a href="briefing.html" class="btn btn-primary">Solicitar Orçamento</a>
+        </div>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <span class="tag">AGÊNCIA WRN</span>
+            <h1>Transforme seu negócio com Chatbots Inteligentes e Aplicativos Personalizados</h1>
+            <p>
+                Somos a Agência WRN, especializada em desenvolvimento de Chatbots com Inteligência 
+                Artificial e criação de aplicativos sob medida. Automatize seu atendimento e 
+                expanda seu negócio com soluções tecnológicas de ponta.
+            </p>
+            <a href="briefing.html" class="cta-button">QUERO TRANSFORMAR MEU NEGÓCIO</a>
+        </div>
+    </main>
+
+    <a href="https://api.whatsapp.com/send/?phone=5511914600243&text=Olá! Gostaria de saber mais sobre os serviços da Agência WRN." target="_blank"
+        class="link-whatsapp">
+        <img src="./img/whatsapp.png" alt="Fale conosco no WhatsApp">
+    </a>
+
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuMobile = document.querySelector('.menu-mobile');
+            const nav = document.querySelector('nav');
+
+            menuMobile.addEventListener('click', function() {
+                menuMobile.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // Fechar menu ao clicar em um link
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuMobile.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

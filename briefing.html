@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing - Agência WRN</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="briefing-container">
+        <a href="index.html" class="home-button">
+            <i class="fas fa-home"></i>
+            <span>Voltar ao Início</span>
+        </a>
+        
+        <div class="briefing-card">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question" data-step="1">
+                    <h2>Que tipo de projeto você precisa?</h2>
+                    <div class="options">
+                        <button class="option-btn" data-value="app">Aplicativo</button>
+                        <button class="option-btn" data-value="chatbot">Chatbot com IA</button>
+                        <button class="option-btn" data-value="both">Ambos</button>
+                    </div>
+                </div>
+
+                <div class="question hidden" data-step="2">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Qual tipo de aplicativo você precisa?</h2>
+                    <div class="options">
+                        <button class="option-btn" data-value="ecommerce">E-commerce</button>
+                        <button class="option-btn" data-value="delivery">Delivery</button>
+                        <button class="option-btn" data-value="crm">Sistema CRM</button>
+                        <button class="option-btn" data-value="custom">Personalizado</button>
+                    </div>
+                </div>
+
+                <div class="question hidden" data-step="3">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Quando você pretende iniciar o projeto?</h2>
+                    <div class="options">
+                        <button class="option-btn" data-value="immediate">Imediatamente</button>
+                        <button class="option-btn" data-value="15days">Em 15 dias</button>
+                        <button class="option-btn" data-value="30days">Em 30 dias</button>
+                        <button class="option-btn" data-value="60days">Em 60 dias ou mais</button>
+                    </div>
+                </div>
+
+                <div class="question hidden" data-step="4">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Qual é o nome da sua empresa?</h2>
+                    <input type="text" class="text-input" id="companyName" placeholder="Digite o nome da sua empresa">
+                    <button class="next-btn" onclick="handleTextInput(this)">Continuar</button>
+                </div>
+
+                <div class="question hidden" data-step="5">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Qual é o seu cargo na empresa?</h2>
+                    <input type="text" class="text-input" id="role" placeholder="Digite seu cargo">
+                    <button class="next-btn" onclick="handleTextInput(this)">Continuar</button>
+                </div>
+
+                <div class="question hidden" data-step="6">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Como podemos te chamar?</h2>
+                    <input type="text" class="text-input" id="name" placeholder="Digite seu nome">
+                    <button class="next-btn" onclick="handleTextInput(this)">Continuar</button>
+                </div>
+
+                <div class="question hidden" data-step="7">
+                    <button class="back-btn" onclick="previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <h2>Qual é o seu WhatsApp?</h2>
+                    <input type="tel" class="text-input" id="phone" placeholder="(00) 00000-0000">
+                    <button class="next-btn" onclick="handleTextInput(this)">Continuar</button>
+                </div>
+
+                <div class="question hidden thank-you" data-step="8">
+                    <div class="success-animation">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Obrigado pelo seu interesse!</h2>
+                    <p>Recebemos seu briefing com sucesso.</p>
+                    <p>Em breve entraremos em contato!</p>
+                    <a href="index.html" class="home-link">Voltar ao Início</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const formData = {};
+        let currentStep = 1;
+        const totalSteps = 7;
+
+        async function sendFormData(data) {
+            try {
+                const response = await fetch('https://n8n-n8n-start.khpxvx.easypanel.host/webhook/briif', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tipoProjeto: data.step1,
+                        tipoAplicativo: data.step2,
+                        prazoInicio: data.step3,
+                        empresa: data.step4,
+                        cargo: data.step5,
+                        nome: data.step6,
+                        whatsapp: data.step7,
+                        dataEnvio: new Date().toISOString()
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar dados');
+                }
+
+                console.log('Dados enviados com sucesso!');
+                return true;
+            } catch (error) {
+                console.error('Erro ao enviar dados:', error);
+                return false;
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentStep - 1) / (totalSteps - 1) * 100;
+            document.querySelector('.progress').style.width = `${progress}%`;
+        }
+
+        function showQuestion(step) {
+            document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+            document.querySelector(`[data-step="${step}"]`).classList.remove('hidden');
+            if (step <= totalSteps) {
+                updateProgress();
+            }
+        }
+
+        function formatPhone(value) {
+            value = value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 2) {
+                value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+            }
+            if (value.length > 9) {
+                value = `${value.slice(0, 10)}-${value.slice(10)}`;
+            }
+            return value;
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showQuestion(currentStep);
+            }
+        }
+
+        async function nextStep(value) {
+            formData[`step${currentStep}`] = value;
+            
+            if (currentStep === totalSteps) {
+                // Tentar enviar os dados
+                const sent = await sendFormData(formData);
+                
+                if (sent) {
+                    // Se enviou com sucesso, mostrar tela de agradecimento
+                    currentStep++;
+                    showQuestion(8);
+                } else {
+                    alert('Ops! Houve um erro ao enviar o briefing. Por favor, tente novamente.');
+                }
+            } else {
+                currentStep++;
+                showQuestion(currentStep);
+            }
+        }
+
+        function handleTextInput(button) {
+            const input = button.previousElementSibling;
+            if (input.value.trim()) {
+                nextStep(input.value.trim());
+            }
+        }
+
+        // Event Listeners para botões de opção
+        document.querySelectorAll('.option-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const value = e.target.dataset.value;
+                nextStep(value);
+            });
+        });
+
+        // Permitir Enter nos campos de texto
+        document.querySelectorAll('.text-input').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && input.value.trim()) {
+                    nextStep(input.value.trim());
+                }
+            });
+
+            // Adicionar evento de input para validar enquanto digita
+            input.addEventListener('input', (e) => {
+                const nextButton = e.target.nextElementSibling;
+                if (e.target.value.trim()) {
+                    nextButton.removeAttribute('disabled');
+                } else {
+                    nextButton.setAttribute('disabled', 'true');
+                }
+            });
+        });
+
+        // Máscara para o campo de telefone
+        document.getElementById('phone').addEventListener('input', (e) => {
+            e.target.value = formatPhone(e.target.value);
+        });
+
+        showQuestion(1);
+    </script>
+</body>
+</html>
